@@ -1,0 +1,8 @@
+# Python compiled files
+*.pyc
+
+# Python virtual environment
+virtualenv
+
+# OS X Folder files
+*.DS_Store
