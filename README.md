@@ -7,7 +7,7 @@ Convert content of a Confluence page to markdown
 1. Clone the repo
 
 	```bash
-	$ git clone git://github.com/GeorgeNagel/confluence-markdown.git
+	$ git clone git@github.com:GeorgeNagel/confluence-markdown.git
 	# Move into the repo
 	$ cd confluence-markdown
 
