@@ -18,8 +18,14 @@ Convert content of a Confluence page to markdown
 	$ source virtualenv/bin/activate
 	```
 
-3. Run against a url
+3. Install required packages
 
 	```bash
-	(virtualenv)$ python convert.py "http://confluence-page-to-convert.com"
+	$ pip install -r requirements.txt
+	```
+
+4. Run against a url
+
+	```bash
+	(virtualenv)$ python convert.py "http://confluence-page-to-convert.com" username password outfilename.md
 	```
