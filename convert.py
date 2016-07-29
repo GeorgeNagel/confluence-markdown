@@ -11,6 +11,7 @@ outfile_name = sys.argv[4]
 
 # Make the request
 response = requests.get(url, auth=(username, password))
+assert response.status_code == 200, "Status code: %s" % response.status_code
 
 # The css selector under which the relevant HTML is loaded
 MAIN_CONTENT_SELECTOR = '#main-content'
