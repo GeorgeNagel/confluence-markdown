@@ -1,6 +1,7 @@
 """ Convert a Confluence export to markdown. """
 
 import os
+import re
 import shutil
 import sys
 
@@ -19,9 +20,20 @@ path_to_markdown_converted = os.path.join(confluence_export_parent_path, markdow
 shutil.copytree(path_to_confluence_export, path_to_markdown_converted)
 
 def make_hrefs_relative(text_content):
-    soup = BeautifulSoup(text_content)
+    re.findall('pattern', text_content)
+    soup = BeautifulSoup(text_content, "html.parser")
     for a in soup.findAll('a'):
-        a['href'] = './%s' % a['href']
+        if 'href' not in a.attrs:
+            continue
+        link = a['href']
+        # Don't process external links
+        if 'http' in link:
+            continue
+        linkname, extension = os.path.splitext(link)
+        if extension == '.html':
+            extension = '.md'
+        link = '%s%s' % (linkname, extension)
+        a['href'] = './%s' % link
     return str(soup)
 
 for root, dirs, files in os.walk(path_to_markdown_converted):
@@ -30,20 +42,19 @@ for root, dirs, files in os.walk(path_to_markdown_converted):
         if not extension == '.html':
             continue
 
+        markdown_filename = "%s.md" % filename
+
         path_to_html_file = os.path.join(root, file)
         print("Converting: %s" % path_to_html_file)
         markdown_text = ""
         with open(path_to_html_file, 'r') as fin:
             html_content = fin.read()
-
-            # html_content = make_hrefs_relative(html_content)
-
+            html_content = make_hrefs_relative(html_content)
             markdown_text = html2text.html2text(html_content)
 
-        markdown_file = "%s.md" % filename
-        path_to_markdown_file = os.path.join(root, markdown_file)
+        path_to_markdown_file = os.path.join(root, markdown_filename)
         with open(path_to_markdown_file, 'w') as fout:
             fout.write(markdown_text)
 
         os.remove(path_to_html_file)
-print("Done!")
+print("Converted!")
