@@ -13,15 +13,17 @@ if len(sys.argv) < 3:
     )
 
 path_to_markdown_converted = sys.argv[1]
-file_to_rename = sys.argv[2]
-new_filename = sys.argv[3]
+file_to_rename_with_extension = sys.argv[2]
+file_to_rename, extension = os.path.splitext(file_to_rename_with_extension)
+new_filename_with_extension = sys.argv[3]
+new_filename, extension = os.path.splitext(new_filename_with_extension)
 
-path_to_file = os.path.join(path_to_markdown_converted, file_to_rename)
-new_path = os.path.join(path_to_markdown_converted, new_filename)
+path_to_file = os.path.join(path_to_markdown_converted, file_to_rename_with_extension)
+new_path = os.path.join(path_to_markdown_converted, new_filename_with_extension)
 os.rename(path_to_file, new_path)
 
-def rename_markdown_link(text_content, old_path, new_path):
-    return re.sub(old_path, new_path, text_content)
+def rename_markdown_link(text_content, old_filename, new_filename):
+    return re.sub(old_filename, new_filename, text_content)
 
 # Now that we've renamed it, we also have to rename any links referencing the file.
 for root, dirs, files in os.walk(path_to_markdown_converted):
@@ -38,4 +40,4 @@ for root, dirs, files in os.walk(path_to_markdown_converted):
         with open(path_to_markdown_file, 'w') as fout:
             fout.write(updated_content)
 
-print("Renamed %s to %s" % (file_to_rename, new_filename))
+print("Renamed %s to %s" % (file_to_rename_with_extension, new_filename_with_extension))

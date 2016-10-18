@@ -30,10 +30,7 @@ def make_hrefs_relative(text_content):
         if 'http' in link:
             continue
         linkname, extension = os.path.splitext(link)
-        if extension == '.html':
-            extension = '.md'
-        link = '%s%s' % (linkname, extension)
-        a['href'] = './%s' % link
+        a['href'] = './%s' % linkname
     return str(soup)
 
 for root, dirs, files in os.walk(path_to_markdown_converted):
