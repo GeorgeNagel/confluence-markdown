@@ -36,5 +36,6 @@ for root, dirs, files in os.walk(path_to_markdown_converted):
             updated_content = rename_markdown_link(text_content, file_to_rename, new_filename)
 
         with open(path_to_markdown_file, 'w') as fout:
-            print("Updating: %s" % path_to_markdown_file)
             fout.write(updated_content)
+
+print("Renamed %s to %s" % (file_to_rename, new_filename))
