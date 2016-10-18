@@ -2,13 +2,7 @@
 
 Tools for converting Confluence wiki pages to [Markdown](https://daringfireball.net/projects/markdown/) for easy compatibility with GitHub wiki.
 
-Basic process
-1. Download Confluence export
-2. Markdownize all the things
-3. Replace self-referencing urls
-4. Upload to GitHub wiki
-
-## Create an export of the relevant Confluence docs
+## Download an export of the relevant Confluence docs
 
 Credit:
 Steps submitted by user Dan Osburn here: https://answers.atlassian.com/questions/235590/export-pages-in-wiki-markup
@@ -19,24 +13,30 @@ Steps submitted by user Dan Osburn here: https://answers.atlassian.com/questions
 4  Wait for the pages to export, click the link to download.
 5  Unzip the downloaded file. Move the resulting folder to the same directory as this file.
 
-## Install
+## Install this code
 
 1. Clone the repo
 
-	```bash
-	$ git clone git@github.com:GeorgeNagel/confluence-markdown.git
-	# Move into the repo
-	$ cd confluence-markdown
+    ```bash
+    $ git clone git@github.com:GeorgeNagel/confluence-markdown.git
+    # Move into the repo
+    $ cd confluence-markdown
 
 2. Create a Python virtual environment
 
-	```bash
-	$ virtualenv -p python3 virtualenv
-	$ source virtualenv/bin/activate
-	```
+    ```bash
+    $ virtualenv -p python3 virtualenv
+    $ source virtualenv/bin/activate
+    ```
 
 3. Install required packages
 
-	```bash
-	$ pip install -r requirements.txt
-	```
+    ```bash
+    (virtualenv)$ pip install -r requirements.txt
+    ```
+
+4. Convert your Confluence export to Markdown
+    
+    ```bash
+    (virtualenv)$ python markdown.py path/to/confluence/export
+    ```
