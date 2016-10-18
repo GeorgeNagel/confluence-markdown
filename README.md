@@ -40,3 +40,10 @@ Steps submitted by user Dan Osburn here: https://answers.atlassian.com/questions
     ```bash
     (virtualenv)$ python markdown.py path/to/confluence/export
     ```
+
+5. Rename any Markdown-converted files.
+    Note that name/of/file should be the path as it exists relative to the Markdown-converted folder. For example, if renaming a file in the top-level of the folder, just use `filename.md`.
+    
+    ```bash
+    (virtualenv)$ python rename_file.py path/to/markdown/converted name/of/file.md
+    ```
